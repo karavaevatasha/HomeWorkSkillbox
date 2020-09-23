@@ -10,15 +10,14 @@ import UIKit
 
 class ToDoCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var todoText: UILabel!
+    @IBOutlet weak var isDoneText: UILabel!
+    
+   override func awakeFromNib() {
+            super.awakeFromNib()
+        }
+
+        override func setSelected(_ selected: Bool, animated: Bool) {
+            super.setSelected(selected, animated: true)
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
-}

@@ -7,24 +7,33 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WeatherViewController: UIViewController {
-
+    
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var townLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    
+    
+    var forecast: [Weather] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        WeatherLoader.shared.delegate = self
+        WeatherLoader.shared.loadWeather()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+extension WeatherViewController: WeatherLoaderDelegate{
+    func loaded(forecast weather: Weather) {
+        DispatchQueue.main.async {
+            self.tempLabel.text = String(format: "%.0f", weather.temp - 273,15) + "°C"
+            self.townLabel.text = weather.nameTown
+            self.dateLabel.text = DateHelper.shared.convertDate(unix: Double(weather.date) ?? 0).date
+            self.feelsLikeLabel.text = "Feels like: " + (String(format: "%.0f", weather.feelsLike - 273,15) + "°C")
+        }
+    }
+}
+
