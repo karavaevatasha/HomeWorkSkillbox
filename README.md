@@ -1,2 +1,2 @@
 # HomeWorkSkillbox
-UserDefaults, Realm, CoreData
+Here the practice app build using UserDefaults, Realm, CoreData for saving different data. First screen for saving login data using UserDefaults. Second saving todo items using Realm and fourth to save weather cast with Realm as well. Third to save also todo items but using CoraData. In Second and Third screen also possible to add new items and edit them by changing status done or not. 
